@@ -19,5 +19,6 @@ function shader(t)
         'AmbientStrength', 0.5 ...
     );
     camproj('perspective');
+    apply_ambient_occlusion(t,'AddLights',false,'SoftLighting',false);
 %     add_shadow(t, lights);
 end

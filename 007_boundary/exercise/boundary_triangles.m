@@ -10,7 +10,8 @@ function BF = boundary_triangles(F)
 % Output:
 %  BF  a list of indices into F of all boundary triangles
 
-BF = ...
+    [I, C] = on_boundary(F);
+    BF = find(I);
 
 end
 
