@@ -1,14 +1,14 @@
 % HKS_matching 
 clear all; close all; clc;
 
-gptoolbox_path = ''; % complete
-addpath(genpath(gptoolbox_path));
+% gptoolbox_path = ''; % complete
+% addpath(genpath(gptoolbox_path));
 
-data_folder = '..\data\';
+data_folder = '../data/';
 meshes = dir([data_folder,'*.o*']); % a list of all the meshes in the data folder
 meshes = {meshes.name}; % access each mesh name by meshes{i}
 
-cam_folder = [data_folder, 'cams\'];
+cam_folder = [data_folder, 'cams/'];
 cams = dir([cam_folder,'*.mat']); % a list of all the cam in the cams folder
 cams = {cams.name};
 
@@ -41,5 +41,15 @@ figure; MESH_VIS.mesh(F,V,'cams',cam,'landmarks',landmarks);
 % to compute the HKS, use gptoolbox's: [K,MK] = hks(V,F)
 % and to mormalize the hks use: K./MK
 
+[K,MK,data] = hks(V,F);
+
+Kn = K ./ MK;
 
 
+close all; clc;
+for i = 1:length(landmarks)
+    semilogx(1:size(Kn, 2), Kn(landmarks(i), :))
+    hold on;
+end
+
+hold off;

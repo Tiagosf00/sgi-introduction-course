@@ -1,5 +1,5 @@
 % Compute geodesic distance along the mesh
-%[V,F] = readOBJ('data/spot_good.obj'); % this one will work
+% [V,F] = readOBJ('data/spot_good.obj'); % this one will work
 [V,F] = readOBJ('data/spot_bad.obj');  % but this one will not!
 
 % Run the algorithm 
@@ -11,9 +11,16 @@ t = tsurf(F,V, 'CData',dists);
 shading interp;
 axis equal;
 axis off;
-colormap(cbrewer('Blues', 500));
-light('Position',[-1.5 1 1],'Style','local');
+colorbar;
+colormap(cbrewer('Blues', 1000));
+light('Position', [-1.5, 1, 1], 'Style', 'local');
+light('Position', [1.5, 3, -2], 'Style', 'local');
 lights = camlight;
-set(t, 'FaceLighting','gouraud', 'FaceColor','interp');
-set(t, 'DiffuseStrength',0.5, 'SpecularStrength',0.2, 'AmbientStrength',0.3);
+set(t, 'FaceLighting', 'gouraud', 'FaceColor', 'interp');
+set(t, ...
+    'DiffuseStrength', 0.6, ...
+    'SpecularStrength', 0.1, ...
+    'AmbientStrength', 0.5 ...
+);
 camproj('perspective');
+apply_ambient_occlusion(t,'AddLights',false,'SoftLighting',false);

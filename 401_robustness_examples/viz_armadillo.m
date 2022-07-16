@@ -1,6 +1,6 @@
 [V,F] = readOBJ('data/armadillo_bad.obj');
 shadingParams = {'FaceLighting','gouraud', 'FaceColor','interp'};
-tsurf(F,V, 'CData',u, shadingParams{:});
+tsurf(F,V,shadingParams{:});
 shading interp;
 axis equal;
 axis off;
